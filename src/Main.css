@@ -1,0 +1,35 @@
+.mapImage{
+    border: solid blue;
+    border-width: 10px;
+    animation-name: mapColor;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes mapColor {
+    from {border:10px solid blue;}
+    to {border: 10px solid green}
+}
+
+.title{
+    font-family:'Lucida Grande';
+}
+
+.mb-3{
+    background-color: aqua;
+}
+
+.txtNextToButton{
+    color:black;
+    font-family: cursive;
+    
+}
+
+.Button{
+    font-family: monospace;
+}
+
+.body{
+    background-color: teal;
+}
