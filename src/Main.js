@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Main.css"
+import Weather from "./Weather";
 // function
 
 function Main() {
@@ -13,16 +14,17 @@ function Main() {
 
   const [mappedData, setMappedData] = useState(null); // Creating a state for the data that gets pulled from the api because it will be changing constantly
   const [mapImage, setMapImage] = useState("15.1335022,-29.9668758")
+  const [forecast, setForecast] = useState([])
 
   async function getLocation() {
     // creating an asynchronous function in order to get the information that the user inputs.
-    let locationData = await axios // creating a variable that will fetch data from the url.
-      .get(
-        `https://us1.locationiq.com/v1/search?key=pk.821caa817d8c0cc9cd908a3dc840e65d&q=${enteredTxt}&format=json`
-      )
-      .then((res) => {
-        return res.data;
-      })
+    let locationData = await axios.get(`https://us1.locationiq.com/v1/search?key=pk.821caa817d8c0cc9cd908a3dc840e65d&q=${enteredTxt}&format=json`)
+    setMapImage(`${locationData.data[0].lat},${locationData.data[0].lon}`)
+      console.log(locationData)
+
+    let foreCastData = await axios.get(`http://localhost:3000/weather?lat=${locationData.data[0].lat}&lon=${locationData.data[0].lon}`)
+    setForecast(foreCastData.data)
+
       .catch((error) => { // error is handled in catch block
         if (error.response) { // status code out of the range of 2xx
           console.log("Data :" , error.response.data);
@@ -32,19 +34,23 @@ function Main() {
         } else {// Error on setting up the request
           console.log('Error', error.message);
         }
-      });;
-    console.log(locationData);
+      });
+    // console.log(locationData);
    
-    let bigNames = locationData.map((value, index) => { // this is mapping through the data that is returned and returning specifically what is asked for3
-      return (
-        <h3>
-            {value.display_name} {value.lat} {value.lon}
-        </h3>
-      );
-    });
-    setMappedData(bigNames[0]);
-    console.log(mappedData);
-    setMapImage(`${locationData[0].lat},${locationData[0].lon}`)
+    // let forecasts = axios.get(`http://localhost:3000/weather?lat=${locationData[0].lat}&lon=${locationData[0].lon}&searchQuery=${enteredTxt}`)
+    // console.log(forecasts)
+
+    //  let bigNames = locationData.map((value, index) => { // this is mapping through the data that is returned and returning specifically what is asked for
+    //    return (
+
+    //      <h3>
+    //          {value.display_name} {value.lat} {value.lon}
+    //      </h3>
+    //    );
+    //  });
+    //  setMappedData(bigNames[0]);
+    //  console.log(mappedData);
+    //  setMapImage(`${locationData[0].lat},${locationData[0].lon}`)
   }
   // when they click the button we need to make a new request to location iq
   return (
@@ -79,6 +85,7 @@ function Main() {
 
       <p> {mappedData}</p>
       <img className="mapImage" src={`https://maps.locationiq.com/v3/staticmap?key=pk.821caa817d8c0cc9cd908a3dc840e65d&center=${mapImage}&zoom=12`} alt=""/>
+      <Weather data={forecast}/>
     </div>
   );
 }
