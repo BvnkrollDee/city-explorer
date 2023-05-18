@@ -20,7 +20,7 @@ function Main() {
     setMapImage(`${locationData.data[0].lat},${locationData.data[0].lon}`);
     console.log(locationData);
 
-    let forecastData = await axios.get(`http://localhost:3000/weather?lat=${locationData.data[0].lat}&lon=${locationData.data[0].lon}`);
+    let forecastData = await axios.get(`https://city-exploer-api-uvtl.onrender.com//weather?lat=${locationData.data[0].lat}&lon=${locationData.data[0].lon}`);
     setForecast(forecastData.data);
   }
 
