@@ -10,7 +10,7 @@ function Movie(props) {
         {props.data.map((element) => {
           return (
             <Card.Body>
-              <Card.Img variant="top" src={element.poster_path} />
+              <Card.Img variant="top" src={"https://image.tmdb.org/t/p/original"+element.poster_path} />
               <Card.Title>{element.title}</Card.Title>
               <Card.Subtitle>{element.overview}</Card.Subtitle>
               <Card.Text> Popularity Rating {element.popularity}</Card.Text>

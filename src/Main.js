@@ -33,7 +33,9 @@ function Main() {
   async function getMovie() {
     let movieData = await axios.get(
       `https://city-exploer-api-uvtl.onrender.com/movies?movie=${enteredTxt}`
-    );
+    ).catch((error) => {
+      console.log("Not today you jive turkey")
+    })
     setMovies(movieData.data);
     console.log(movieData.data);
   }
