@@ -25,14 +25,14 @@ function Main() {
     // console.log(locationData);
 
     let forecastData = await axios.get(
-      `http://localhost:3000/weather?lat=${locationData.data[0].lat}&lon=${locationData.data[0].lon}`
+      `https://city-exploer-api-uvtl.onrender.com/weather?lat=${locationData.data[0].lat}&lon=${locationData.data[0].lon}`
     );
     setForecast(forecastData.data);
   }
 
   async function getMovie() {
     let movieData = await axios.get(
-      `http://localhost:3000/movies?movie=${enteredTxt}`
+      `https://city-exploer-api-uvtl.onrender.com/movies?movie=${enteredTxt}`
     );
     setMovies(movieData.data);
     console.log(movieData.data);
