@@ -8,14 +8,12 @@ import Main from "./Main";
 import Accordion from 'react-bootstrap/Accordion'
 
 function Weather(props) {
-  console.log(props.data); // Logging the received weather data
+//   console.log(props.data); // Logging the received weather data
 
   return (
     <>
       {/* Displaying weather data as paragraphs */}
-      {props.data.map((element) => {
-        return (<p>{element.date} {element.description}</p>);
-      })}
+
 
       {/* Displaying weather data as an accordion */}
       <Accordion defaultActiveKey="0">
