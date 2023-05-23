@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
+import Movies from './Movies'
 
 function Movie(props) {
   return (
@@ -9,12 +10,7 @@ function Movie(props) {
       <Card style={{ width: "18rem" }}>
         {props.data.map((element) => {
           return (
-            <Card.Body>
-              <Card.Img variant="top" src={"https://image.tmdb.org/t/p/original"+element.poster_path} />
-              <Card.Title>{element.title}</Card.Title>
-              <Card.Subtitle>{element.overview}</Card.Subtitle>
-              <Card.Text> Popularity Rating {element.popularity}</Card.Text>
-            </Card.Body>
+            <Movies info={element}/>
           );
         })}
       </Card>

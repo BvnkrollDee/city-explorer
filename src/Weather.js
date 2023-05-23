@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Main from "./Main";
 import Accordion from 'react-bootstrap/Accordion'
+import WeatherDay from "./WeatherDay";
 
 function Weather(props) {
 //   console.log(props.data); // Logging the received weather data
@@ -19,10 +20,7 @@ function Weather(props) {
       <Accordion defaultActiveKey="0">
         {props.data.map((element, index) => {
           return (
-            <Accordion.Item eventKey={index}>
-              <Accordion.Header>{element.date}</Accordion.Header>
-              <Accordion.Body>{element.description}</Accordion.Body>
-            </Accordion.Item>
+           <WeatherDay data={element} NickKerr={index}/>
           );
         })}
       </Accordion>
